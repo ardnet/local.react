@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic Example with Click Counter</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/react-flip-move.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_DHcXHPYBSjIVaCQZEG4ZlpLkvslnFlBCnQUCzlbRBio.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_bzenEexKMrydLvw4KzTPAMUXyEFe9FHxDEvlpkGAHxc.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_WazKw-o-6OYLfe6HUqP6UxhgM1z9zc8APWMD-dJEcuA.css">
+    <link rel="stylesheet" href="//cloud.typography.com/6673892/750244/css/fonts.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_hPPcshvNu7TbYz60WUWbuAFtV6itRrUdjqohFOf_1QY.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_6JucYQtT2jN5d6jj6NeoruoQx_KYA3PzlpOX0_8tJZA.css">
+    <link rel="stylesheet" href="http://www.fox.com/sites/default/files/css/css_J3YcT6vy8dqrCta12vdYdkfyVbyg2X97b3lX_h4aUFg.css" media="print">
+  </head>
+  <body>
+    <div class="containerSide__center">
+      <div class="panel-pane pane-views pane-full-episodes-listing">
+        <div class="pane-content">
+          <div class="view view-full-episodes-listing view-id-full_episodes_listing view-display-id-block_2 view-dom-id-bd94eb4922654a539e4fbfcd0f5598e0">
+            <div class="view-content" id="exampleList">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var videoList = [
+        {
+          "nid":182786,
+          "title":"Home Again",
+          "thumb":"http://www.fox.com/sites/default/files/styles/full_episodes_rotator_thumbnail/public/video-image-thumb/fox_TheXFiles_1AYW02_hulu.jpg",
+          "type":"video","url":"/watch/616557123886/7756658688"
+        },
+        {
+          "nid":187501,
+          "title":"Mr. Freeze",
+          "thumb":"http://www.fox.com/sites/default/files/styles/full_episodes_rotator_thumbnail/public/video-image-thumb/Gotham_GTH212_2500_1280x720_633837635777.jpg",
+          "type":"video",
+          "url":"/watch/633284675626/7684182528"
+        },
+        {
+          "nid":188896,
+          "title":"Wingman",
+          "thumb":"http://www.fox.com/sites/default/files/styles/full_episodes_rotator_thumbnail/public/video-image-thumb/fox_Lucifer_L106_hulu.jpg",
+          "type":"video",
+          "url":"/watch/638578243933/7766097408"
+        }
+      ];
+    </script>
+    <script type="text/babel">
+      var ProperListRender = React.createClass({displayName: "ProperListRender",
+        render: function() {
+          var listItems = this.props.list.map(function(video, idx) {
+            console.log(idx);
+                return <li>
+                  <a href={video.url}>
+                    <img src={video.thumb} />
+                  </a>
+                  <h3><a href={video.url}>{video.title}</a></h3>
+                </li>;
+              });
+          return <ul>{listItems}</ul>
+        }
+      });
+      ReactDOM.render(React.createElement(ProperListRender, {list: videoList}), document.getElementById('exampleList'));
+    </script>
+
+
+
+
+<style>
+ul {
+  list-style-type: none;
+  width: 500px;
+}
+
+h3 {
+  font:20px;
+}
+
+li img {
+  float: left;
+  margin-right: 10px;
+  width: 144px;
+}
+
+li {
+  padding: 5px;
+  overflow: auto;
+}
+
+li:hover {
+  cursor: pointer;
+}
+</style>
+  </body>
+</html>
