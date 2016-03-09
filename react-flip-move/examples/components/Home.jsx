@@ -39,11 +39,13 @@ class Shuffle extends Component {
     // Log messages from the server
     this.connection.onmessage = function (e) {
       var array = JSON.parse(e.data);
+      var tempList = that.state.articles;
       array.forEach( function(index) {
-         that.state.articles.push(index);
+         tempList.push(index);
       });
-      console.log(that.state);
-      console.log(e.data);
+      that.setState({
+        articles: tempList
+      })
     };
 
     this.toggleList   = this.toggleList.bind(this);
