@@ -35,9 +35,15 @@ class Shuffle extends Component {
     
     this.connection = new WebSocket('ws://rocky-sierra-19135.herokuapp.com/');
     
+    var that = this;
     // Log messages from the server
     this.connection.onmessage = function (e) {
-      console.log('Server: ' + e.data);
+      var array = JSON.parse(e.data);
+      array.forEach( function(index) {
+         that.state.articles.push(index);
+      });
+      console.log(that.state);
+      console.log(e.data);
     };
 
     this.toggleList   = this.toggleList.bind(this);
