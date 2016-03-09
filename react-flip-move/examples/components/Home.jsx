@@ -3,8 +3,6 @@ import moment                           from 'moment';
 import { shuffle }                      from 'lodash';
 import classNames                       from 'classnames';
 
-import articles from '../data/articles';
-
 import FlipMove from 'react-flip-move';
 import Toggle from './Toggle.jsx';
 
@@ -15,8 +13,10 @@ class ListItem extends Component {
 
     return (
       <li id={this.props.id} className={listClass}>
-        <h3>{this.props.name}</h3>
-        <h5>{moment(this.props.timestamp).format('MMM Do, YYYY')}</h5>
+        <a href={this.props.url}>
+          <img src={this.props.thumb} />
+        </a>
+        <h3><a href={this.props.url}>{this.props.title}</a></h3>
       </li>
     );
   }
@@ -30,7 +30,7 @@ class Shuffle extends Component {
       view: 'list',
       order: 'asc',
       sortingMethod: 'chronological',
-      articles
+      articles: []
     };
     
     this.connection = new WebSocket('ws://rocky-sierra-19135.herokuapp.com/');
@@ -40,11 +40,12 @@ class Shuffle extends Component {
     this.connection.onmessage = function (e) {
       var array = JSON.parse(e.data);
       var tempList = that.state.articles;
-      array.forEach( function(index) {
+      
+      /*array.forEach( function(index) {
          tempList.push(index);
-      });
+      }); */
       that.setState({
-        articles: tempList
+        articles: array
       })
     };
 
@@ -113,26 +114,6 @@ class Shuffle extends Component {
   render() {
     return (
       <div id="shuffle" className={this.state.view}>
-        <header>
-          <div className="abs-right">
-            <Toggle
-              clickHandler={this.toggleSort}
-              text={this.state.order === 'asc' ? 'Ascending' : 'Descending'}
-              icon={this.state.order === 'asc' ? 'angle-up' : 'angle-down'}
-              active={this.state.sortingMethod === 'chronological'}
-            />
-            <Toggle
-              clickHandler={this.sortShuffle}
-              text="Shuffle" icon="random"
-              active={this.state.sortingMethod === 'shuffle'}
-            />
-            <Toggle
-              clickHandler={this.sortRotate}
-              text="Rotate" icon="refresh"
-              active={this.state.sortingMethod === 'rotate'}
-            />
-          </div>
-        </header>
         <ul>
           <FlipMove staggerDurationBy="30" duration={500}>
             { this.renderArticles() }
